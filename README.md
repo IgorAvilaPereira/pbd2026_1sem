@@ -14,6 +14,8 @@
 [videos.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./00_guia_rapido/videos.md) <br>
 ## [./01_introducao](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./01_introducao) <br>
 [etapas.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/etapas.png) <br>
+[manutencao.dia](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/manutencao.dia) <br>
+[manutencao.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/manutencao.sql) <br>
 [mapamental.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/mapamental.png) <br>
 
 ### Propostas
