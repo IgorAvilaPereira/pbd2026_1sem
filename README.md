@@ -52,3 +52,6 @@
 
 [Baixar Material da Aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/01_introducao)
 [stored_procedure.pdf](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/stored_procedure.pdf) <br>
+## [./02_formatura](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./02_formatura) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/02_formatura) <br><br>
+&nbsp;
