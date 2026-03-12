@@ -1,7 +1,5 @@
 # Lista
 
-# 📘 PARTE 1 — Exercícios (somente as ordens)
-
 ## Usuários
 
 **1.** Crie uma stored procedure para **cadastrar um novo usuário**, recebendo nome, email e senha.
