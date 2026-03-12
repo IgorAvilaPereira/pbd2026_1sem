@@ -1,11 +1,12 @@
+# python3 -m venv .venv
+# . .venv/bin/activate
+# pip install Flask
 from flask import Flask
+# pip install "psycopg[binary]"
 import psycopg
 from flask import render_template
 from flask import abort, redirect, url_for
 from flask import request
-
-
-
 
 app = Flask(__name__)
 
@@ -34,3 +35,6 @@ def index():
             cur.execute("select * from usuario;")
             return render_template('index.html', vetUsuario=cur.fetchall())
     # return "<p>Hello, World!</p>"
+
+# para executar
+# flask --app app run
