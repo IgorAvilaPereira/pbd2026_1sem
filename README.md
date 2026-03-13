@@ -67,3 +67,6 @@
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/03_exercicios) <br><br>
 &nbsp;
 [manutencao](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./03_exercicios/manutencao) <br>
+## [./04_exercicios_stored_procedure_com_integracao_flask_python](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./04_exercicios_stored_procedure_com_integracao_flask_python) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/04_exercicios_stored_procedure_com_integracao_flask_python) <br><br>
+&nbsp;
