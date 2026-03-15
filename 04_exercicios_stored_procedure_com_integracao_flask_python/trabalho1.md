@@ -1,8 +1,12 @@
-# Trabalho 1 – Sistema de Manutenção com PostgreSQL + Flask + Mustache (5 pontos)
+Segue o **mesmo trabalho ajustado para usar Jinja2 (template padrão do Flask)** em vez de Mustache.
+
+---
+
+# Trabalho 1 – Sistema de Manutenção com PostgreSQL + Flask + Jinja2 (5 pontos)
 
 ## Objetivo
 
-Desenvolver funcionalidades no banco utilizando **Functions e Stored Procedures em PostgreSQL** e criar uma **aplicação web simples com Flask e Mustache Template** que utilize essas rotinas.
+Desenvolver funcionalidades no banco utilizando **Functions e Stored Procedures em PostgreSQL** e criar uma **aplicação web simples com Flask e Jinja2 Templates** que utilize essas rotinas.
 
 O sistema deve permitir **consultar informações e executar ações sobre os serviços de manutenção**.
 
@@ -43,7 +47,7 @@ Crie uma **function** que calcule o **tempo de atendimento de um serviço finali
 Cálculo:
 
 ```
-finalizado - data_hora_cricao
+finalizado - data_hora_criacao
 ```
 
 A função deve retornar:
@@ -120,13 +124,13 @@ O tempo médio deve considerar apenas **serviços finalizados**.
 
 ---
 
-# Parte 2 – Aplicação Web com Flask + Mustache (2 pontos)
+# Parte 2 – Aplicação Web com Flask + Jinja2 (2 pontos)
 
 Criar uma aplicação **Flask** que utilize:
 
 * **PostgreSQL**
 * **Stored Procedures e Functions**
-* **Mustache Templates**
+* **Jinja2 Templates**
 
 A aplicação deve possuir **páginas HTML renderizadas no servidor**.
 
@@ -210,10 +214,10 @@ trabalho/
 ├── requirements.txt
 │
 ├── templates/
-│   dashboard.mustache
-│   ranking.mustache
-│   servico.mustache
-│   status.mustache
+│   dashboard.html
+│   ranking.html
+│   servico.html
+│   status.html
 │
 └── sql/
     schema.sql
@@ -227,19 +231,20 @@ trabalho/
 * **Python**
 * **Flask**
 * **PostgreSQL**
-* **Mustache Templates**
+* **Jinja2 Templates**
 * **psycopg2**
 
 ---
 
 # Critérios de Avaliação
 
-| Item                      | Pontos |
-| ------------------------- | ------ |
-| Functions corretas        | 1,5    |
-| Procedures corretas       | 1,0    |
-| Integração Flask + Banco  | 1,0    |
-| Uso de Mustache Templates | 0,5    |
-| Organização do projeto    | 1,0    |
+| Item                     | Pontos |
+| ------------------------ | ------ |
+| Functions corretas       | 1,5    |
+| Procedures corretas      | 1,0    |
+| Integração Flask + Banco | 1,0    |
+| Uso de Jinja2 Templates  | 0,5    |
+| Organização do projeto   | 1,0    |
 
 Total: **5 pontos**
+
