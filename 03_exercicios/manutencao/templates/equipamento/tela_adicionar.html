@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastro de Usuários</title>
+<title>Cadastro de Equipamento</title>
 
 <style>
 :root{
@@ -82,35 +82,20 @@ button:hover{
     transform:scale(1.03);
 }
 </style>
- <script>
-        function sugere_senha(){
-            fetch('/sugere_senha')
-  .then(response => response.json())
-  .then(data => alert(data.senha))
-  .catch(error => console.error('Error fetching data:', error));
-        }
-    </script>
 </head>
 
 <body>
 
 <div class="container">
-    <h1>Adicionar Usuário</h1>
+    <h1>Adicionar Equipamento</h1>
 
-    <form method="POST" action="/adicionar_usuario">
+    <form method="POST" action="/equipamento/adicionar_equipamento">
         
-        <!-- <label>ID</label>
-        <input type="number" name="id" required> -->
 
-        <label>Nome</label>
-        <input type="text" name="nome" required>
+        <label>Descrição</label>
+        <input type="text" name="descricao" required>
 
-        <label>Email</label>
-        <input type="email" name="email" required>
-
-        <label>Senha <button onclick="sugere_senha()"> sugere?</button></label>
-        <input type="password" name="senha" required id="senha">
-
+       
         <button type="submit">Cadastrar</button>
 
     </form>

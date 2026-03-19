@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Usuários</title>
+<title>Equipamentos</title>
 
 <style>
 :root{
@@ -88,25 +88,23 @@ li:hover{
 }
 
 </style>
-   
 </head>
 <body>
 
 <div class="container">
-    <h1>Usuários</h1>
+    <h1>Equipamentos</h1>
 
     <ul>
-    {% for usuario in vetUsuario %}
+    {% for equipamento in vetEquipamento %}
         <li>
-            <div class="id">ID: {{usuario[0]}}</div>
-            <div>Nome: {{usuario[2]}}</div>
-            <div class="email">Email: {{usuario[1]}}</div>
+            <div class="id">ID: {{equipamento[0]}}</div>
+            <div class="email">{{equipamento[1]}}</div>
         </li>
     {% endfor %}
     </ul>
 
-    <a href="/tela_adicionar" class="botao-add">+ Adicionar Usuário</a>
-    <a href="/equipamento" class="botao-add">Equipamentos</a>
+    <a href="/" class="botao-add">Voltar</a>
+    <a href="/equipamento/tela_adicionar" class="botao-add">Adicionar</a>
 
 </div>
 

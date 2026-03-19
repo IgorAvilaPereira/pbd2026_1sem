@@ -136,7 +136,40 @@ INSERT INTO status (situacao, servico_id) VALUES
 ('TENTEI RESOLVER E NÃO DEU! Sorry!', 1);
 
 
+CREATE OR REPLACE FUNCTION retorna_usuario_nome(p_id integer) RETURNS TEXT as
+$$
+DECLARE
+    p_nome TEXT := NULL;
+BEGIN
+    SELECT nome FROM usuario where id = p_id INTO p_nome;
+    RETURN p_nome;
+    
+END;
+$$ LANGUAGE 'plpgsql';
 
+DROP FUNCTION alterar_senha;
+
+CREATE OR REPLACE FUNCTION alterar_senha(p_email character varying(200), p_nova_senha character varying(200)) RETURNS BOOLEAN AS
+$$
+BEGIN
+    BEGIN
+        UPDATE usuario SET senha = md5(p_nova_senha) WHERE email = p_email; 
+        RETURN TRUE;
+    EXCEPTION
+        WHEN OTHERS THEN RAISE NOTICE 'Deu xabum!';
+        RETURN FALSE;
+    END; 
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- Equipamento
+
+CREATE OR REPLACE PROCEDURE cadastrar_equipamento(p_descricao text) AS 
+$$
+BEGIN
+    INSERT INTO equipamento (descricao) VALUES (p_descricao);
+END;
+$$ LANGUAGE 'plpgsql';
 
 
 
