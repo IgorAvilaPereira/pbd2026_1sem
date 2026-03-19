@@ -1,6 +1,4 @@
-Segue o **mesmo trabalho ajustado para usar Jinja2 (template padrão do Flask)** em vez de Mustache.
 
----
 
 # Trabalho 1 – Sistema de Manutenção com PostgreSQL + Flask + Jinja2 (5 pontos)
 
