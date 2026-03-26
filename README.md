@@ -72,5 +72,7 @@
 &nbsp;
 [trabalho1.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./04_exercicios_stored_procedure_com_integracao_flask_python/trabalho1.md) <br>
 ## [./05_continuacao_lista_projeto_flask](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./05_continuacao_lista_projeto_flask) <br>
+[lista.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./05_continuacao_lista_projeto_flask/lista.md) <br>
+[manutencao.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./05_continuacao_lista_projeto_flask/manutencao.sql) <br>
 Continuação
 [stored_procedure_functions.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./05_continuacao_lista_projeto_flask/stored_procedure_functions.md) <br>
