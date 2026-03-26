@@ -351,5 +351,116 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
+Boa pergunta — e sim: **poderia (e normalmente deveria) usar `jsonb` em vez de `json`** 👍
+
+Mas tem alguns detalhes importantes que valem ouro em aula 👇
+
+---
+
+# 🆚 20. `json` vs `jsonb`
+
+### ✔ `json`
+
+* Armazena como texto
+* Preserva formatação original
+* Mais leve para inserção simples
+
+### ✔ `jsonb`
+
+* Armazena em formato binário
+* Permite indexação (GIN)
+* Muito mais eficiente para consulta/manipulação
+
+👉 Em sistemas reais: **quase sempre use `jsonb`**
+
+---
+
+# 🔄 Ajustando tua função
+
+### Antes:
+
+```sql
+RETURNS SETOF json
+```
+
+### Melhor:
+
+```sql
+RETURNS SETOF jsonb
+```
+
+---
+
+# ✅ Versão corrigida
+
+```sql id="y7k6nn"
+CREATE OR REPLACE FUNCTION servicosJson()
+RETURNS SETOF jsonb AS $$
+BEGIN
+RETURN QUERY
+SELECT to_jsonb(t)
+FROM (
+    SELECT s.id, s.titulo, u.nome
+    FROM servico s
+    JOIN usuario u ON s.criador_id = u.id
+) t;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+---
+
+# ⚡ Melhor ainda (mais moderno)
+
+Nem precisa subquery:
+
+```sql id="3vte93"
+CREATE OR REPLACE FUNCTION servicosJson()
+RETURNS SETOF jsonb AS $$
+BEGIN
+RETURN QUERY
+SELECT jsonb_build_object(
+    'id', s.id,
+    'titulo', s.titulo,
+    'criador', u.nome
+)
+FROM servico s
+JOIN usuario u ON s.criador_id = u.id;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+---
+
+# 🔍 Quando **não** usar `jsonb`?
+
+Casos raros:
+
+* precisa manter exatamente o JSON original (formatação/ordem)
+* armazenamento bruto sem processamento
+
+---
+
+# 🎯 Regra prática (boa pra prova)
+
+👉 Se a pergunta for:
+
+> “Qual usar no PostgreSQL?”
+
+Resposta esperada:
+
+> **jsonb**, pois permite indexação e melhor performance
+
+---
+
+# 💡 Dica de ouro pra aula
+
+Se quiser elevar o nível, mostra isso:
+
+```sql
+CREATE INDEX idx_json ON tabela USING GIN (campo_jsonb);
+```
+
+
 
 
