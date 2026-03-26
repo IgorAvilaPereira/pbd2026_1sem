@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Equipamentos</title>
+<title>Serviço</title>
 
 <style>
 :root{
@@ -92,19 +92,23 @@ li:hover{
 <body>
 
 <div class="container">
-    <h1>Equipamentos</h1>
+    <h1>servicos</h1>
 
     <ul>
-    {% for equipamento in vetEquipamento %}
+    {% for servico in vetServico %}
         <li>
-            <div class="id">ID: {{equipamento[0]}} <a href="/equipamento/remover/{{equipamento[0]}}">Deletar</a> <a href="/equipamento/tela_editar/{{equipamento[0]}}">Editar</a></div>
-            <div class="email">{{equipamento[1]}}</div>
+            <div class="id">ID: {{servico[0]}} <a href="/servico/remover/{{servico[0]}}">Deletar</a> <a href="/servico/tela_editar/{{servico[0]}}">Editar</a></div>
+            <div class="email">{{servico[1]}}</div>
+            <div class="email">{{servico[2].strftime('%Y-%m-%d %H:%M')}}</div>
+              <div class="email">{{servico[3] if servico[3] else "ainda n finalizado" }}</div>
+<div class="email">Criador: {{servico[4]}}</div>
+<div class="email">Responsável: {{servico[8]}}</div>
         </li>
     {% endfor %}
     </ul>
 
     <a href="/" class="botao-add">Voltar</a>
-    <a href="/equipamento/tela_adicionar" class="botao-add">Adicionar</a>
+    <a href="/servico/tela_adicionar" class="botao-add">Adicionar</a>
 
 </div>
 

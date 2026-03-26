@@ -42,9 +42,37 @@ def adicionar_equipamento():
             cur.execute("CALL cadastrar_equipamento(%s)", [descricao])
     return redirect(url_for('listar_equipamento'))
 
+@app.route("/equipamento/editar_equipamento", methods=['POST'])
+def editar_equipamento():
+    descricao = request.form['descricao']
+    id = int(request.form['id'])
+
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:
+            cur.execute("CALL atualizar_equipamento(%s, %s)", [id, descricao])
+    return redirect(url_for('listar_equipamento'))
+
+
+
 @app.route("/equipamento/tela_adicionar")
 def equipamento_tela_adicionar():
     return render_template('/equipamento/tela_adicionar.html')
+
+
+@app.route("/equipamento/tela_editar/<id>")
+def equipamento_tela_editar(id):
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:
+            cur.execute("select * from equipamento where id = %s;", [id])
+            return render_template('/equipamento/tela_editar.html', equipamento = cur.fetchone())
+
+@app.route("/equipamento/remover/<id>")
+def equipamento_remover(id):
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:
+            cur.execute("CALL remover_equipamento(%s);", [id])
+    return redirect(url_for('listar_equipamento'))
+
 
 @app.route("/tela_adicionar")
 def tela_adicionar():
@@ -54,8 +82,18 @@ def tela_adicionar():
 def listar_equipamento():
     with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
         with conn.cursor() as cur:
-            cur.execute("select * from equipamento;")
+            cur.execute("select * from equipamento where ativo is true;")
             return render_template('/equipamento/index.html', vetEquipamento=cur.fetchall())
+   
+
+
+@app.route("/servico")
+def listar_servico():
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:
+            cur.execute("with tb_criador AS (select servico.id, titulo, data_hora_criacao, finalizado, nome as criador, responsavel_id from servico inner join usuario on (servico.criador_id = usuario.id)) SELECT *, usuario.nome as responsavel from tb_criador inner join usuario on (tb_criador.responsavel_id = usuario.id);")
+            # print(cur.fetchall())
+            return render_template('/servico/index.html', vetServico=cur.fetchall())
    
 
 
