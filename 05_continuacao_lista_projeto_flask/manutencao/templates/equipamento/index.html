@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipamentos</title>
+
+<style>
+:root{
+    --cor-primaria:#4f46e5;
+    --cor-fundo:#f4f6fb;
+    --cor-card:#ffffff;
+    --cor-texto:#333;
+    --radius:12px;
+}
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cor-fundo);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    background: var(--cor-card);
+    padding:30px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width:400px;
+}
+
+h1{
+    text-align:center;
+    color: var(--cor-primaria);
+    margin-bottom:20px;
+}
+
+ul{
+    list-style:none;
+    padding:0;
+}
+
+li{
+    background:#f9fafc;
+    padding:15px;
+    border-radius: var(--radius);
+    margin-bottom:10px;
+    transition:0.3s;
+    border-left:5px solid var(--cor-primaria);
+}
+
+li:hover{
+    transform:scale(1.03);
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.id{
+    font-weight:bold;
+    color: var(--cor-primaria);
+}
+
+.email{
+    color:#666;
+    font-size:14px;
+}
+
+/* BOTÃO BONITO */
+.botao-add{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    padding:14px;
+    background: var(--cor-primaria);
+    color:white;
+    text-decoration:none;
+    border-radius: var(--radius);
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.botao-add:hover{
+    background:#3730a3;
+    transform:scale(1.05);
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Equipamentos</h1>
+
+    <ul>
+    {% for equipamento in vetEquipamento %}
+        <li>
+            <div class="id">ID: {{equipamento[0]}}</div>
+            <div class="email">{{equipamento[1]}}</div>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <a href="/" class="botao-add">Voltar</a>
+    <a href="/equipamento/tela_adicionar" class="botao-add">Adicionar</a>
+
+</div>
+
+</body>
+</html>
