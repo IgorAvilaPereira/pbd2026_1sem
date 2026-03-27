@@ -164,12 +164,120 @@ $$ LANGUAGE 'plpgsql';
 
 -- Equipamento
 
+-- 6
 CREATE OR REPLACE PROCEDURE cadastrar_equipamento(p_descricao text) AS 
 $$
 BEGIN
     INSERT INTO equipamento (descricao) VALUES (p_descricao);
 END;
 $$ LANGUAGE 'plpgsql';
+
+-- 7
+CREATE OR REPLACE FUNCTION listar_equipamentos() RETURNS TABLE (
+    p_id integer,
+    p_descricao text
+) AS
+$$
+BEGIN
+    RETURN QUERY SELECT * FROM equipamento;
+END;
+$$ LANGUAGE 'plpgsql';
+
+
+-- 8
+CREATE OR REPLACE FUNCTION listar_equipamentos_default(p1 integer DEFAULT 0) RETURNS TABLE (
+    p_id integer,
+    p_descricao text
+) AS
+$$
+BEGIN
+    IF (p1 = 0) THEN 
+        RETURN QUERY SELECT * FROM equipamento;
+    ELSE
+        RETURN QUERY SELECT * FROM equipamento where id = p1;
+    END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 9
+CREATE OR REPLACE PROCEDURE atualizar_equipamento(p_id integer, p_descricao text) AS
+$$
+BEGIN
+    UPDATE equipamento SET descricao = p_descricao where id = p_id;    
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 10
+ALTER TABLE equipamento ADD COLUMN ativo boolean default true;
+
+CREATE OR REPLACE PROCEDURE remover_equipamento(p_id integer) AS
+$$
+BEGIN
+    IF (EXISTS (SELECT * FROM equipamento where id = p_id)) THEN
+        UPDATE equipamento SET ativo = FALSE where id = p_id;    
+    ELSE
+        RAISE NOTICE 'N EXISTE';
+    END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+
+
+-- 11
+ALTER TABLE usuario ADD COLUMN ativo boolean default true;
+
+CREATE OR REPLACE FUNCTION novo_servico(p_titulo text, p_descricao text, p_criador_id INTEGER, p_responsavel_id integer default 0) RETURNS BOOLEAN AS
+$$ 
+BEGIN
+    IF (p_responsavel_id != 0) THEN
+        IF (EXISTS(select * from usuario where id = p_responsavel_id)) THEN
+            IF (EXISTS(select * from usuario where id = p_criador_id)) THEN
+                INSERT INTO servico (titulo, descricao, criador_id, responsavel_id) VALUES (p_titulo, p_descricao, p_criador_id, p_responsavel_id);
+                RETURN TRUE;
+            ELSE 
+                RAISE NOTICE 'id criador invalido';
+                RETURN FALSE;
+            END IF;
+        ELSE
+            RAISE NOTICE 'id reponsavel invalido';
+            RETURN FALSE;
+        END IF;
+    ELSE 
+        p_responsavel_id := p_criador_id;
+        IF (EXISTS(select * from usuario where id = p_responsavel_id)) THEN
+            IF (EXISTS(select * from usuario where id = p_criador_id)) THEN
+                INSERT INTO servico (titulo, descricao, criador_id, responsavel_id) VALUES (p_titulo, p_descricao, p_criador_id, p_responsavel_id);
+               RETURN TRUE;
+            ELSE 
+                RAISE NOTICE 'id criador invalido';
+                RETURN FALSE;
+            END IF;
+        ELSE
+            RAISE NOTICE 'id reponsavel invalido';
+            RETURN FALSE;
+        END IF;
+     END IF;
+     RETURN FALSE;   
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 12
+
+-- 13
+CREATE OR REPLACE FUNCTION listar_servicos_nao_finalizados() RETURNS TABLE (p_id integer, p_descricao text) AS
+$$
+begin
+    return query select * from servico where finalizado is null order by id;
+end;
+
+$$ LANGUAGE 'plpgsql';
+
+alter table servico rename  data_hora_cricao TO data_hora_criacao;
+
+
+with tb_criador AS (
+    select servico.id, titulo, data_hora_criacao, finalizado, nome as criador, responsavel_id from servico inner join usuario on (servico.criador_id = usuario.id)
+) SELECT tb_criador.id, tb_criador.titulo, criador, usuario.nome as responsavel from tb_criador inner join usuario on (tb_criador.responsavel_id = usuario.id);
+
 
 
 
