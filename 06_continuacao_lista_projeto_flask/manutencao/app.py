@@ -54,9 +54,41 @@ def editar_equipamento():
 
 
 
+@app.route("/alterar_usuario", methods=['POST'])
+def usuario_alterar():
+    id = int(request.form['id'])
+    nome = request.form['nome']
+    email = request.form['email']
+    radio_senha = request.form['radio_senha']
+    senha = request.form['senha']
+    if (radio_senha == "true"):
+        with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+            with conn.cursor() as cur:
+                cur.execute("UPDATE usuario SET nome = %s, email = %s where id = %s", [nome, email, id])
+    else:
+        with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+            with conn.cursor() as cur:
+                cur.execute("UPDATE usuario SET nome = %s, email = %s, senha = %s where id = %s", [nome, email, senha, id])
+    return redirect(url_for('index'))
+
+
 @app.route("/equipamento/tela_adicionar")
 def equipamento_tela_adicionar():
     return render_template('/equipamento/tela_adicionar.html')
+
+@app.route("/servico/tela_adicionar_status/<id>")
+def servico_tela_adicionar_status(id):
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:
+            
+            cur.execute("select * from servico where id = %s;", [id])
+            servico = cur.fetchone()
+            print(servico)
+            cur.execute("select * from usuario where id = %s;", [servico[5]])
+            criador = cur.fetchone()
+            cur.execute("select * from usuario where id = %s;", [servico[6]])
+            responsavel = cur.fetchone()
+    return render_template('/servico/tela_adicionar_status.html',servico_id = servico[0], criador=criador, responsavel=responsavel)
 
 
 @app.route("/equipamento/tela_editar/<id>")
@@ -65,6 +97,14 @@ def equipamento_tela_editar(id):
         with conn.cursor() as cur:
             cur.execute("select * from equipamento where id = %s;", [id])
             return render_template('/equipamento/tela_editar.html', equipamento = cur.fetchone())
+        
+
+@app.route("/usuario/tela_alterar/<id>")
+def usuario_tela_alterar(id):
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:
+            cur.execute("select * from usuario where id = %s;", [id])
+            return render_template('/tela_alterar.html', usuario = cur.fetchone())
 
 @app.route("/equipamento/remover/<id>")
 def equipamento_remover(id):
@@ -73,6 +113,13 @@ def equipamento_remover(id):
             cur.execute("CALL remover_equipamento(%s);", [id])
     return redirect(url_for('listar_equipamento'))
 
+
+@app.route("/usuario/remover/<id>")
+def usuario_remover(id):
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:
+            cur.execute("UPDATE usuario SET ativo = FALSE where id = %s;", [id])
+    return redirect(url_for('index'))
 
 @app.route("/tela_adicionar")
 def tela_adicionar():
@@ -103,7 +150,7 @@ def index():
         with conn.cursor() as cur:
             # cur.execute("select * from busque_usuario_por_email(%s);", [email])
             # print(cur.fetchone())
-            cur.execute("select * from usuario;")
+            cur.execute("select * from usuario where ativo is true;")
             return render_template('index.html', vetUsuario=cur.fetchall())
     # return "<p>Hello, World!</p>"
 

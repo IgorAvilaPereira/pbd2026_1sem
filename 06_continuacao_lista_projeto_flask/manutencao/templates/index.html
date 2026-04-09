@@ -102,6 +102,8 @@
                 <div class="id">ID: {{usuario[0]}}</div>
                 <div>Nome: {{usuario[2]}}</div>
                 <div class="email">Email: {{usuario[1]}}</div>
+                <div><a href="/usuario/remover/{{usuario[0]}}">Excluir</a></div>
+                <div><a href="/usuario/tela_alterar/{{usuario[0]}}">Alterar</a></div>
             </li>
             {% endfor %}
         </ul>

@@ -266,7 +266,7 @@ $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION listar_servicos_nao_finalizados() RETURNS TABLE (p_id integer, p_descricao text) AS
 $$
 begin
-    return query select * from servico where finalizado is null order by id;
+    return query select id, descricao from servico where finalizado is null order by id;
 end;
 
 $$ LANGUAGE 'plpgsql';
@@ -278,7 +278,83 @@ with tb_criador AS (
     select servico.id, titulo, data_hora_criacao, finalizado, nome as criador, responsavel_id from servico inner join usuario on (servico.criador_id = usuario.id)
 ) SELECT tb_criador.id, tb_criador.titulo, criador, usuario.nome as responsavel from tb_criador inner join usuario on (tb_criador.responsavel_id = usuario.id);
 
+-- 14 
+CREATE OR REPLACE FUNCTION listar_servicos_finalizados() RETURNS TABLE (p_id integer, p_descricao text) AS
+$$
+begin
+    return query select id, descricao from servico where finalizado is not null order by id;
+end;
 
+$$ LANGUAGE 'plpgsql';
+
+-- 15
+CREATE OR REPLACE FUNCTION obter_servico_id(integer) RETURNS TABLE(p_id integer, p_descricao text, p_data_hora_criacao timestamp) AS 
+$$
+begin
+    return query select id, descricao, data_hora_criacao from servico where id = $1;
+end;
+$$ language 'plpgsql';
+
+-- 19:33 primeira pergunta - nata corrigindo um caracter
+DROP PROCEDURE alterar_responsavel;
+
+CREATE OR REPLACE PROCEDURE alterar_responsavel(p_novo_responsavel_id integer, p_servico_id integer) AS 
+$$
+begin
+    if (exists(select * from usuario where id = p_novo_responsavel_id)) then
+    update servico set responsavel_id = p_novo_responsavel_id where id = p_servico_id;
+    else
+        raise notice 'deu xabum responsavel % n existe', p_novo_responsavel_id;
+    end if;    
+end;
+$$ LANGUAGE 'plpgsql';
+
+-- 20
+CREATE OR REPLACE FUNCTION qtde_servico() RETURNS integer AS
+$$
+DECLARE
+    qtde integer := 0;
+BEGIN
+    SELECT COUNT(*) FROM servico INTO qtde;
+    RETURN qtde;
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 21. Crie uma stored procedure para registrar um novo status para um serviço.
+
+CREATE OR REPLACE FUNCTION registrar_novo_status_criador(p_situacao text, p_servico_id integer, p_criador_id integer) RETURNS BOOLEAN AS
+$$
+begin
+    IF (EXISTS(SELECT * FROM servico WHERE id = p_servico_id)) THEN
+        IF(EXISTS(SELECT * FROM servico where id = p_servico_id and criador_id = p_criador_id)) THEN   
+            INSERT INTO status (situacao, servico_id, criador_id) VALUES (p_situacao, p_servico_id, p_criador_id);
+            RETURN TRUE;
+        ELSE
+            RAISE NOTICE 'Este servico n tem este criador';
+        END IF;
+    END IF;
+    RETURN FALSE;
+end;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION registrar_novo_status_responsavel(p_situacao text, p_servico_id integer, p_responsavel_id integer) RETURNS BOOLEAN AS
+$$
+begin
+    IF (EXISTS(SELECT * FROM servico WHERE id = p_servico_id)) THEN
+         IF(EXISTS(SELECT * FROM servico where id = p_servico_id and responsavel_id = p_responsavel_id)) THEN 
+        INSERT INTO status (situacao, servico_id, responsavel_id) VALUES (p_situacao, p_servico_id,p_responsavel_id);
+        RETURN TRUE;
+         ELSE
+            RAISE NOTICE 'Este servico n tem este reponsavel';
+        END IF;
+    END IF;
+    RETURN FALSE;
+end;
+$$ LANGUAGE 'plpgsql';
+
+ALTER TABLE status ADD COLUMN responsavel_id INTEGER references usuario(id);
+
+ALTER TABLE status ADD COLUMN criador_id INTEGER references usuario(id);
 
 
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/servico/adicionar_status" method="post">
+        <textarea name="situacao"></textarea>
+        <input type="radio" name="criador_id" value="{{criador[0]}}"> Criador {{criador[2]}} <br>
+        <input type="radio" name="responsavel_id" value="{{responsavel[0]}}"> Responsavel {{responsavel[2]}} <br>
+        <input type="hidden" name="servico_id" value="{{servico_id}}">
+        <input type="submit">
+    </form>
+</body>
+</html>
