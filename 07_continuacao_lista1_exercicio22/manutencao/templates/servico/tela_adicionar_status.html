@@ -1,17 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adicionar Status</title>
+
+<style>
+:root{
+    --cor-primaria:#4f46e5;
+    --cor-fundo:#f4f6fb;
+    --cor-card:#ffffff;
+    --cor-texto:#333;
+    --radius:12px;
+}
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cor-fundo);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    background: var(--cor-card);
+    padding:30px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width:400px;
+}
+
+h1{
+    text-align:center;
+    color: var(--cor-primaria);
+    margin-bottom:20px;
+}
+
+textarea{
+    width:100%;
+    height:120px;
+    padding:10px;
+    border-radius:var(--radius);
+    border:1px solid #ddd;
+    resize:none;
+    margin-bottom:20px;
+    font-size:14px;
+}
+
+.radio-group{
+    background:#f9fafc;
+    padding:15px;
+    border-radius:var(--radius);
+    margin-bottom:15px;
+    border-left:5px solid var(--cor-primaria);
+}
+
+.radio-group label{
+    display:block;
+    margin-bottom:8px;
+    cursor:pointer;
+}
+
+.botao{
+    display:block;
+    width:100%;
+    text-align:center;
+    padding:14px;
+    background: var(--cor-primaria);
+    color:white;
+    border:none;
+    border-radius: var(--radius);
+    font-weight:bold;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.botao:hover{
+    background:#3730a3;
+    transform:scale(1.05);
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.botao-voltar{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    text-decoration:none;
+    color:var(--cor-primaria);
+    font-weight:bold;
+}
+
+</style>
+
+
 </head>
+
 <body>
-    <form action="/servico/adicionar_status" method="post">
-        <textarea name="situacao"></textarea>
-        <input type="radio" name="criador_id" value="{{criador[0]}}"> Criador {{criador[2]}} <br>
-        <input type="radio" name="responsavel_id" value="{{responsavel[0]}}"> Responsavel {{responsavel[2]}} <br>
-        <input type="hidden" name="servico_id" value="{{servico_id}}">
-        <input type="submit">
-    </form>
+
+<div class="container">
+
+<h1>Adicionar Status</h1>
+
+<form action="/servico/adicionar_status" method="post">
+
+    <textarea name="situacao" placeholder="Digite a situação do serviço..."></textarea>
+    <div class="radio-group">
+        <select name="dono_status">
+            <option value="criador-{{criador[0]}}">Criador:{{criador[2]}}</option>
+            <option value="responsavel-{{responsavel[0]}}">Responsável:{{responsavel[2]}}</option>
+        </select>
+    </div>
+    <input type="hidden" name="servico_id" value="{{servico_id}}">
+    <input type="submit" value="Salvar Status" class="botao">
+
+</form>
+
+<a href="/" class="botao-voltar">← Voltar</a>
+
+</div>
+
 </body>
 </html>

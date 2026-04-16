@@ -275,8 +275,8 @@ alter table servico rename  data_hora_cricao TO data_hora_criacao;
 
 
 with tb_criador AS (
-    select servico.id, titulo, data_hora_criacao, finalizado, nome as criador, responsavel_id from servico inner join usuario on (servico.criador_id = usuario.id)
-) SELECT tb_criador.id, tb_criador.titulo, criador, usuario.nome as responsavel from tb_criador inner join usuario on (tb_criador.responsavel_id = usuario.id);
+    select servico.id, titulo, data_hora_criacao, descricao, finalizado, nome as criador, responsavel_id from servico inner join usuario on (servico.criador_id = usuario.id)
+) SELECT tb_criador.id, tb_criador.titulo, tb_criador.descricao,  tb_criador.data_hora_criacao, tb_criador.finalizado, criador, usuario.nome as responsavel from tb_criador inner join usuario on (tb_criador.responsavel_id = usuario.id);
 
 -- 14 
 CREATE OR REPLACE FUNCTION listar_servicos_finalizados() RETURNS TABLE (p_id integer, p_descricao text) AS
@@ -337,6 +337,7 @@ begin
 end;
 $$ LANGUAGE 'plpgsql';
 
+-- 22
 CREATE OR REPLACE FUNCTION registrar_novo_status_responsavel(p_situacao text, p_servico_id integer, p_responsavel_id integer) RETURNS BOOLEAN AS
 $$
 begin
@@ -356,6 +357,89 @@ ALTER TABLE status ADD COLUMN responsavel_id INTEGER references usuario(id);
 
 ALTER TABLE status ADD COLUMN criador_id INTEGER references usuario(id);
 
+-- 23
+CREATE OR REPLACE FUNCTION listar_status(integer) RETURNS TABLE(p_status text) AS
+$$
+BEGIN
+    RETURN QUERY SELECT situacao FROM status where servico_id = $1;
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 24
+CREATE OR REPLACE FUNCTION listar_ultimo_status(integer) RETURNS text AS 
+$$
+DECLARE
+    status_retorno text;
+BEGIN
+    SELECT situacao FROM status WHERE servico_id = $1 ORDER BY data_hora DESC LIMIT 1 INTO status_retorno;
+    RETURN status_retorno;
+END;
+$$ LANGUAGE 'plpgsql';
+
+
+-- 25
+DROP FUNCTION listar_servicos_por_usuario;
+CREATE OR REPLACE FUNCTION listar_servicos_por_usuario(integer) RETURNS TABLE (p_id integer, p_descricao text, p_titulo text, p_data_hora_criacao timestamp, p_finalizado timestamp, p_responsavel_nome character varying(200)) AS
+$$
+BEGIN
+    RETURN QUERY select servico.id, servico.descricao, servico.titulo, servico.data_hora_criacao, servico.finalizado, usuario.nome as responsavel_nome FROM servico INNER JOIN usuario ON (servico.responsavel_id = usuario.id) where criador_id = $1;
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 26
+CREATE OR REPLACE FUNCTION qtde_servicos_por_criador() RETURNS TABLE (p_id integer, p_nome character varying(200), p_qtde integer) AS 
+$$
+BEGIN
+    RETURN QUERY SELECT usuario.id, usuario.nome,  count(servico.criador_id)::integer as qtde from usuario inner join servico on (usuario.id = servico.criador_id) group by usuario.id, criador_id,usuario.nome;
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 27
+CREATE OR REPLACE FUNCTION listar_servicos_por_data(date) RETURNS TABLE (p_id integer, p_descricao text, p_titulo text, p_data_hora_criacao timestamp, p_finalizado timestamp, p_responsavel_id integer, p_criador_id integer) AS
+$$
+BEGIN
+   RETURN QUERY SELECT id, descricao, titulo, data_hora_criacao, finalizado, responsavel_id, criador_id from servico where data_hora_criacao::date = $1 ORDER BY id;
+END;
+$$ LANGUAGE 'plpgsql';
+
+select * from listar_servicos_por_data('2026-03-26');
+
+-- 28
+CREATE OR REPLACE FUNCTION qtde_servicos_aberto() RETURNS integer 
+AS
+$$
+DECLARE
+    qtde integer := 0;
+BEGIN
+    select count(*)::integer from servico where finalizado is null into qtde;
+    RETURN qtde;
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 29
+CREATE OR REPLACE FUNCTION qtde_servicos_finalizados() RETURNS integer 
+AS
+$$
+DECLARE
+    qtde integer := 0;
+BEGIN
+    select count(*)::integer from servico where finalizado is not null into qtde;
+    RETURN qtde;
+END;
+$$ LANGUAGE 'plpgsql';
+
+-- 30
+CREATE OR REPLACE FUNCTION listar_servicos_nome_criador_nome_responsavel() RETURNS TABLE 
+(p_id integer, p_titulo text, p_descricao text, p_data_hora_criacao timestamp, p_finalizado timestamp, p_criador character varying(200), p_responsavel character varying(200)) AS
+$$
+BEGIN
+    RETURN QUERY with tb_criador AS (
+        select servico.id, titulo, data_hora_criacao, descricao, finalizado, nome as criador, responsavel_id from servico inner join usuario on (servico.criador_id = usuario.id)
+    ) SELECT tb_criador.id, tb_criador.titulo, tb_criador.descricao,  tb_criador.data_hora_criacao, tb_criador.finalizado, criador, usuario.nome as responsavel from tb_criador inner join usuario on (tb_criador.responsavel_id = usuario.id);
+END;
+$$ LANGUAGE 'plpgsql';
+
+select * from listar_servicos_nome_criador_nome_responsavel();
 
 
 

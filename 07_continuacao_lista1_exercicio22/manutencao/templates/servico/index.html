@@ -103,6 +103,7 @@ li:hover{
               <div class="email">{{servico[3] if servico[3] else "ainda n finalizado" }}</div>
 <div class="email">Criador: {{servico[4]}}</div>
 <div class="email">Responsável: {{servico[8]}}</div>
+<div class="email"><a href="/servico/finalizar/{{servico[0]}}">Finalizar</a></div>
 <div class="email"><a href="/servico/tela_adicionar_status/{{servico[0]}}">Adicionar Status</a></div>
         </li>
     {% endfor %}

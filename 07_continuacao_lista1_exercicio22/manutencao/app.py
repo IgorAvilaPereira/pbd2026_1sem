@@ -76,14 +76,34 @@ def usuario_alterar():
 def equipamento_tela_adicionar():
     return render_template('/equipamento/tela_adicionar.html')
 
+@app.route("/servico/finalizar/<id>")
+def finalizar(id):
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:            
+            cur.execute("update servico set finalizado = current_timestamp where id = %s;", [id])
+    return redirect(url_for('listar_servico'))
+
+
+@app.route("/servico/adicionar_status", methods=['POST'])
+def adicionar_status():
+    situacao = request.form['situacao']
+    dono_status = request.form['dono_status']
+    servico_id = int(request.form['servico_id'])
+    criador_id = int(dono_status.split('-')[1]) if dono_status.split('-')[0] == "criador" else None
+    responsavel_id = int(dono_status.split('-')[1]) if dono_status.split('-')[0] == "responsavel" else None
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:            
+            cur.execute("INSERT INTO status (situacao, servico_id, criador_id, responsavel_id) values (%s,%s,%s,%s);", [situacao, servico_id, criador_id, responsavel_id])
+    return redirect(url_for('listar_servico'))
+
+
 @app.route("/servico/tela_adicionar_status/<id>")
 def servico_tela_adicionar_status(id):
     with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
-        with conn.cursor() as cur:
-            
+        with conn.cursor() as cur:            
             cur.execute("select * from servico where id = %s;", [id])
             servico = cur.fetchone()
-            print(servico)
+            # print(servico)
             cur.execute("select * from usuario where id = %s;", [servico[5]])
             criador = cur.fetchone()
             cur.execute("select * from usuario where id = %s;", [servico[6]])
