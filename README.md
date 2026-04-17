@@ -92,3 +92,6 @@ Continuação
 Continuação
 [stored_procedure_functions.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./07_continuacao_lista1_exercicio22/stored_procedure_functions.md) <br>
 [manutencao](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./07_continuacao_lista1_exercicio22/manutencao) <br>
+## [./08_atendimento_trabalho_revisao](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./08_atendimento_trabalho_revisao) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/08_atendimento_trabalho_revisao) <br><br>
+&nbsp;
