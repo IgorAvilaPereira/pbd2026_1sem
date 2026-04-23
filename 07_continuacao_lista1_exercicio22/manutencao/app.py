@@ -96,6 +96,41 @@ def adicionar_status():
             cur.execute("INSERT INTO status (situacao, servico_id, criador_id, responsavel_id) values (%s,%s,%s,%s);", [situacao, servico_id, criador_id, responsavel_id])
     return redirect(url_for('listar_servico'))
 
+@app.route("/servico/visualizar_status/<id>")
+def servico_listar_status(id):
+    vetStatus = []
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:            
+            cur.execute("select * from status where servico_id = %s;", [id])
+            vetStatus = cur.fetchall()
+    return render_template('/servico/visualizar_status.html', vetStatus = vetStatus)
+
+
+@app.route("/servico/adicionar", methods=['POST'])
+def adicionar_servico():
+    titulo = request.form['titulo']
+    descricao = request.form['descricao']
+    criador_id = int(request.form['criador_id'])
+    responsavel_id = int(request.form['responsavel_id'])
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:            
+            cur.execute("INSERT INTO servico (titulo, descricao, criador_id, responsavel_id) values (%s,%s,%s,%s);", [titulo, descricao, criador_id, responsavel_id])
+    return redirect(url_for('listar_servico'))
+
+
+@app.route("/servico/editar", methods=['POST'])
+def editar_servico():
+    titulo = request.form['titulo']
+    descricao = request.form['descricao']
+    criador_id = int(request.form['criador_id'])
+    responsavel_id = int(request.form['responsavel_id'])
+    servico_id = int(request.form['servico_id'])
+
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:            
+            cur.execute("UPDATE servico SET titulo = %s, descricao = %s, criador_id = %s, responsavel_id = %s where id = %s", [titulo, descricao, criador_id, responsavel_id, servico_id])
+    return redirect(url_for('listar_servico'))
+
 
 @app.route("/servico/tela_adicionar_status/<id>")
 def servico_tela_adicionar_status(id):
@@ -103,12 +138,30 @@ def servico_tela_adicionar_status(id):
         with conn.cursor() as cur:            
             cur.execute("select * from servico where id = %s;", [id])
             servico = cur.fetchone()
-            # print(servico)
             cur.execute("select * from usuario where id = %s;", [servico[5]])
             criador = cur.fetchone()
             cur.execute("select * from usuario where id = %s;", [servico[6]])
             responsavel = cur.fetchone()
     return render_template('/servico/tela_adicionar_status.html',servico_id = servico[0], criador=criador, responsavel=responsavel)
+
+@app.route("/servico/tela_adicionar")
+def servico_tela_adicionar():
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur: 
+            cur.execute("select * from usuario;")
+            vetUsuario = cur.fetchall()
+    return render_template('/servico/tela_adicionar.html',vetCriador=vetUsuario, vetResponsavel=vetUsuario)
+
+@app.route("/servico/tela_editar/<id>")
+def servico_tela_editar(id):    
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur: 
+            cur.execute("select * from usuario;")
+            vetUsuario = cur.fetchall()
+            cur.execute("select * from servico where id = %s;", [int(id)])
+            servico = cur.fetchone()            
+    return render_template('/servico/tela_editar.html',vetCriador=vetUsuario, vetResponsavel=vetUsuario, servico = servico)
+
 
 
 @app.route("/equipamento/tela_editar/<id>")
@@ -174,7 +227,32 @@ def index():
             return render_template('index.html', vetUsuario=cur.fetchall())
     # return "<p>Hello, World!</p>"
 
-
+@app.route("/dashboard")
+def dashboard():
+    sql = "select extract(year from finalizado) as ano, count(*) as qtde from servico where finalizado is not null group by extract(year from finalizado);"
+    labels = []
+    data = []    
+    with psycopg.connect("dbname=manutencao host=localhost port=5432 user=postgres password=postgres") as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql)
+            vetResult = cur.fetchall()
+            for result in vetResult:
+                labels.append(result[0])
+                data.append(result[1])                
+    return render_template('teste.html', labels=labels, data=data)
+"""
+16/04 - pendencias
+adicionar servico -> ok
+finalizar servico -> pendente +ou- (por quem?)
+visualizar status -> ok
+editar servico -> ok
+cadastrar status -> ok +ou- (por quem? - qual criador e responsável atual?)
+login
+upload de arquivo
+trocar tela inicial por servico listar
+log
+dashboard - indicadores graficos -> ok (1 feito)
+"""
 
 # para executar
 # flask --app app run

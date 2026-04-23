@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Serviço</title>
+<title>Status</title>
 
 <style>
 :root{
@@ -57,17 +58,16 @@ li:hover{
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-.id{
+.status{
     font-weight:bold;
     color: var(--cor-primaria);
 }
 
-.email{
+.descricao{
     color:#666;
     font-size:14px;
 }
 
-/* BOTÃO BONITO */
 .botao-add{
     display:block;
     text-align:center;
@@ -86,33 +86,25 @@ li:hover{
     transform:scale(1.05);
     box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
-
 </style>
 </head>
+
 <body>
 
 <div class="container">
-    <h1>servicos</h1>
 
-    <ul>
-    {% for servico in vetServico %}
-        <li>
-            <div class="id">ID: {{servico[0]}} <a href="/servico/remover/{{servico[0]}}">Deletar</a> <a href="/servico/tela_editar/{{servico[0]}}">Editar</a></div>
-            <div class="email">{{servico[1]}}</div>
-            <div class="email">{{servico[2].strftime('%Y-%m-%d %H:%M')}}</div>
-              <div class="email">{{servico[3] if servico[3] else "ainda n finalizado" }}</div>
-<div class="email">Criador: {{servico[4]}}</div>
-<div class="email">Responsável: {{servico[8]}}</div>
-<div class="email"><a href="/servico/visualizar_status/{{servico[0]}}">Visualizar Todos osStatus</a></div>
+<h1>Status</h1>
 
-<div class="email"><a href="/servico/finalizar/{{servico[0]}}">Finalizar</a></div>
-<div class="email"><a href="/servico/tela_adicionar_status/{{servico[0]}}">Adicionar Status</a></div>
-        </li>
+<ul>
+    {% for status in vetStatus %}
+    <li>
+        <div class="status">{{status[2]}}</div>
+        <div class="descricao">{{status[3]}}</div>
+    </li>
     {% endfor %}
-    </ul>
+</ul>
 
-    <a href="/" class="botao-add">Voltar</a>
-    <a href="/servico/tela_adicionar" class="botao-add">Adicionar</a>
+<a href="/" class="botao-add">Voltar</a>
 
 </div>
 
