@@ -18,6 +18,7 @@
 [etapas.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/etapas.png) <br>
 [lista.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/lista.md) <br>
 [manutencao.dia](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/manutencao.dia) <br>
+[manutencao.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/manutencao.png) <br>
 [manutencao.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/manutencao.sql) <br>
 [mapamental.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/mapamental.png) <br>
 
@@ -74,6 +75,7 @@
 ## [./05_continuacao_lista_projeto_flask](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./05_continuacao_lista_projeto_flask) <br>
 [lista.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./05_continuacao_lista_projeto_flask/lista.md) <br>
 [manutencao.dia](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./05_continuacao_lista_projeto_flask/manutencao.dia) <br>
+[manutencao.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./05_continuacao_lista_projeto_flask/manutencao.png) <br>
 [manutencao.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./05_continuacao_lista_projeto_flask/manutencao.sql) <br>
 Continuação
 [stored_procedure_functions.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./05_continuacao_lista_projeto_flask/stored_procedure_functions.md) <br>
@@ -81,6 +83,7 @@ Continuação
 ## [./06_continuacao_lista_projeto_flask](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./06_continuacao_lista_projeto_flask) <br>
 [lista.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./06_continuacao_lista_projeto_flask/lista.md) <br>
 [manutencao.dia](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./06_continuacao_lista_projeto_flask/manutencao.dia) <br>
+[manutencao.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./06_continuacao_lista_projeto_flask/manutencao.png) <br>
 [manutencao.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./06_continuacao_lista_projeto_flask/manutencao.sql) <br>
 Continuação
 [stored_procedure_functions.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./06_continuacao_lista_projeto_flask/stored_procedure_functions.md) <br>
@@ -88,6 +91,7 @@ Continuação
 ## [./07_continuacao_lista1_exercicio22](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./07_continuacao_lista1_exercicio22) <br>
 [lista.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./07_continuacao_lista1_exercicio22/lista.md) <br>
 [manutencao.dia](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./07_continuacao_lista1_exercicio22/manutencao.dia) <br>
+[manutencao.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./07_continuacao_lista1_exercicio22/manutencao.png) <br>
 [manutencao.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./07_continuacao_lista1_exercicio22/manutencao.sql) <br>
 Continuação
 [stored_procedure_functions.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./07_continuacao_lista1_exercicio22/stored_procedure_functions.md) <br>
