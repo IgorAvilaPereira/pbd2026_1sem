@@ -99,3 +99,6 @@ Continuação
 ## [./08_atendimento_trabalho_revisao](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./08_atendimento_trabalho_revisao) <br>
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/08_atendimento_trabalho_revisao) <br><br>
 &nbsp;
+## [./09_atividade_avaliada1](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./09_atividade_avaliada1) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/09_atividade_avaliada1) <br><br>
+&nbsp;
