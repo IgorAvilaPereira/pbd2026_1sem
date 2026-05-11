@@ -110,3 +110,13 @@ Continuação
 
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/10_resolucao_atividade_avaliada1) <br><br>
 &nbsp;
+## [./11_trigger](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./11_trigger) <br>
+[exemplo_trigger.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/exemplo_trigger.sql) <br>
+Introdução a Triggers
+
+Lista 2 (Trigger)
+
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/11_trigger) <br><br>
+&nbsp;
+[trigger.pdf](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/trigger.pdf) <br>
+[triggers_printscreen.pdf](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/triggers_printscreen.pdf) <br>
