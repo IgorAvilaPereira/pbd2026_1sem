@@ -113,8 +113,10 @@ Continuação
 ## [./11_trigger](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./11_trigger) <br>
 [exemplo_trigger.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/exemplo_trigger.sql) <br>
 [lista_trigger.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/lista_trigger.md) <br>
+[manutencao.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/manutencao.sql) <br>
 
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/11_trigger) <br><br>
 &nbsp;
 [trigger.pdf](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/trigger.pdf) <br>
 [triggers_printscreen.pdf](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/triggers_printscreen.pdf) <br>
+[manutencao](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/manutencao) <br>
