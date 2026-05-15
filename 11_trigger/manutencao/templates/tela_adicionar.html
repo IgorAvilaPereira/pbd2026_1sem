@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro de Usuários</title>
+
+<style>
+:root{
+    --cor-primaria:#4f46e5;
+    --cor-fundo:#f4f6fb;
+    --cor-card:#ffffff;
+    --cor-texto:#333;
+    --radius:12px;
+}
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cor-fundo);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    background: var(--cor-card);
+    padding:35px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width:420px;
+}
+
+h1{
+    text-align:center;
+    color: var(--cor-primaria);
+    margin-bottom:25px;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    margin-top:12px;
+    margin-bottom:5px;
+    font-weight:bold;
+    color: var(--cor-texto);
+}
+
+input{
+    padding:12px;
+    border-radius: var(--radius);
+    border:1px solid #ddd;
+    outline:none;
+    transition:0.3s;
+    font-size:15px;
+}
+
+input:focus{
+    border-color: var(--cor-primaria);
+    box-shadow:0 0 5px rgba(79,70,229,0.3);
+}
+
+button{
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius: var(--radius);
+    background: var(--cor-primaria);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#3730a3;
+    transform:scale(1.03);
+}
+</style>
+ <script>
+        function sugere_senha(){
+            fetch('/sugere_senha')
+  .then(response => response.json())
+  .then(data => alert(data.senha))
+  .catch(error => console.error('Error fetching data:', error));
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Adicionar Usuário</h1>
+
+    <form method="POST" action="/adicionar_usuario">
+        
+        <!-- <label>ID</label>
+        <input type="number" name="id" required> -->
+
+        <label>Nome</label>
+        <input type="text" name="nome" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Senha <button onclick="sugere_senha()"> sugere?</button></label>
+        <input type="password" name="senha" required id="senha">
+
+        <button type="submit">Cadastrar</button>
+
+    </form>
+</div>
+
+</body>
+</html>
+
