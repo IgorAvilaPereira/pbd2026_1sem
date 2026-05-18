@@ -121,5 +121,7 @@ Continuação
 [triggers_printscreen.pdf](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/triggers_printscreen.pdf) <br>
 [manutencao](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./11_trigger/manutencao) <br>
 ## [./12_trigger](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./12_trigger) <br>
+[lista_trigger.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./12_trigger/lista_trigger.md) <br>
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/12_trigger) <br><br>
 &nbsp;
+[trabalho2.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./12_trigger/trabalho2.md) <br>
