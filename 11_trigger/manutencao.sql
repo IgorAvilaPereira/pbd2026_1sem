@@ -10,8 +10,7 @@ $$
 --DECLARE
 BEGIN
     -- PRINT de debug
-    RAISE NOTICE '%', email;
-    
+    RAISE NOTICE '%', email;    
     IF (POSITION('@' IN email) != 0) THEN
         RETURN TRUE;
     END IF;
@@ -446,7 +445,7 @@ CREATE TABLE auditoria (
     log text
 );
 
--- 1, 2, 3, 4, 5, 6 e 7 da Lista sobre trigger
+-- 1, 2, 3, 4, 5, 6, 7 e 8 da Lista sobre trigger
 CREATE OR REPLACE FUNCTION verifica_email_gatilho() RETURNS TRIGGER AS
 $$
 BEGIN
@@ -470,10 +469,78 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
-
-
-
 CREATE TRIGGER trigger1 BEFORE INSERT OR UPDATE ON usuario 
 FOR EACH ROW EXECUTE PROCEDURE verifica_email_gatilho();
 
+-- 9
+CREATE OR REPLACE FUNCTION bloqueia_id() RETURNS TRIGGER AS
+$$
+DECLARE
+    id_valido INTEGER := 0;
+BEGIN
+    -- BEFORE INSERT
+    IF (TG_OP = 'INSERT') THEN
+--        RAISE NOTICE '%', NEW.id;
+        SELECT currval('usuario_id_seq') INTO id_valido;
+        IF (NEW.id = id_valido) THEN 
+            RETURN NEW;
+        ELSE
+            RETURN NULL;
+        END IF;
+    END IF;
+    
+    -- BEFORE UPDATE
+    IF (TG_OP = 'UPDATE') THEN
+        IF (NEW.id != OLD.id OR NEW.id IS NULL) THEN 
+            RETURN NULL;
+        ELSE           
+            RETURN NEW;
+        END IF;
+    END IF;    
+    RETURN NULL;    
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trigger2 BEFORE INSERT OR UPDATE ON usuario 
+FOR EACH ROW EXECUTE PROCEDURE bloqueia_id();
+
+-- 10
+CREATE OR REPLACE FUNCTION colocar_responsavel_automaticamente() RETURNS TRIGGER AS
+$$
+DECLARE
+    responsavel_id_aux INTEGER := 0;
+BEGIN
+    IF (NEW.responsavel_id IS NULL) THEN
+--        RAISE NOTICE 'criador_id %', NEW.criador_id; 
+        SELECT id FROM usuario WHERE id != NEW.criador_id ORDER BY random() LIMIT 1 INTO responsavel_id_aux;
+--        RAISE NOTICE 'responsavel_id_aux %', responsavel_id_aux;
+        IF (responsavel_id_aux != 0) THEN
+            NEW.responsavel_id := responsavel_id_aux;
+        ELSE
+            NEW.responsavel_id := NEW.criador_id;
+        END IF;
+   END IF;
+   RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER trigger3 ON servico;
+CREATE TRIGGER trigger3 BEFORE INSERT ON servico 
+FOR EACH ROW EXECUTE PROCEDURE colocar_responsavel_automaticamente();
+
+-- 11 -- ja existe uma constraint na propria coluna na propria tabela
+
+-- 12/13
+CREATE OR REPLACE FUNCTION maiuscula() RETURNS TRIGGER AS 
+$$
+BEGIN
+    NEW.titulo  := UPPER(NEW.titulo);
+    NEW.descricao := UPPER(NEW.descricao);
+    RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+CREATE TRIGGER trigger4 BEFORE INSERT OR UPDATE ON servico 
+FOR EACH ROW EXECUTE PROCEDURE maiuscula();
+
+-- 14  -- ja existe uma constraint na propria coluna na propria tabela
 
