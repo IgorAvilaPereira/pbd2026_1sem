@@ -22,6 +22,9 @@
 [manutencao.sql](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/manutencao.sql) <br>
 [mapamental.png](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./01_introducao/mapamental.png) <br>
 
+* [Stored Procedure](https://www.youtube.com/watch?v=Llrp3upyYgE&list=PLvT8P1q6jMWepzWUfhnG8SbA8xk8EmSXP)
+
+
 ### Propostas
 
 1. Controle Financeiro Pessoal
@@ -100,6 +103,10 @@ Continuação
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/08_atendimento_trabalho_revisao) <br><br>
 &nbsp;
 ## [./09_atividade_avaliada1](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./09_atividade_avaliada1) <br>
+[Resolução - Atividade Avaliada 1 bim - 2026/1](https://youtu.be/Llrp3upyYgE)
+
+
+
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/09_atividade_avaliada1) <br><br>
 &nbsp;
 ## [./10_resolucao_atividade_avaliada1](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./10_resolucao_atividade_avaliada1) <br>
