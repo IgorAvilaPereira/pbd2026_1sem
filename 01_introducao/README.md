@@ -1,4 +1,7 @@
 
+* [Stored Procedure](https://www.youtube.com/watch?v=Llrp3upyYgE&list=PLvT8P1q6jMWepzWUfhnG8SbA8xk8EmSXP)
+
+
 ### Propostas
 
 1. Controle Financeiro Pessoal
