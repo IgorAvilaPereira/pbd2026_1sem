@@ -10,6 +10,8 @@
 
 * [Encontro Síncrono - Modelagem Lógica (Modelo Relacional) e Modelagem Física (script.sql) - 27/09/23](https://www.youtube.com/watch?v=CzLUSWYwNQM&list=PLvT8P1q6jMWeItlnefnUWlASNMGA_q2Dw&index=2)
 
+* [Stored Procedure](https://www.youtube.com/watch?v=Llrp3upyYgE&list=PLvT8P1q6jMWepzWUfhnG8SbA8xk8EmSXP)
+
 * [Playlist com vídeos sobre JDBC, DAO e ORM](https://youtube.com/playlist?list=PLvT8P1q6jMWf_Epq_VhCgupInovZGdSZ-&si=YWavfUkW4eWIn3U6)
 
 * [Correção de Exercícios - Lista de Functions PL/pgSQL](https://www.youtube.com/watch?v=ORzJMIayu8E)
