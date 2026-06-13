@@ -132,3 +132,6 @@ Continuação
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/12_trigger) <br><br>
 &nbsp;
 [trabalho2.md](https://github.com/IgorAvilaPereira/pbd2026_1sem/blob/main/./12_trigger/trabalho2.md) <br>
+## [./13_atividade_avaliada2](https://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/./13_atividade_avaliada2) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/pbd2026_1sem/tree/main/13_atividade_avaliada2) <br><br>
+&nbsp;
